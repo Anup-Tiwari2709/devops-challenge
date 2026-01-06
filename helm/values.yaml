@@ -1,0 +1,30 @@
+replicaCount: 1
+
+image:
+  repository: devops-challenge-app
+  pullPolicy: IfNotPresent
+  tag: "latest"
+
+service:
+  type: NodePort
+  port: 80
+  targetPort: 80
+  nodePort: 30080
+
+resources:
+  limits:
+    memory: 256Mi
+    cpu: 500m
+  requests:
+    memory: 128Mi
+    cpu: 250m
+
+securityContext:
+  runAsNonRoot: true
+  runAsUser: 1001
+  runAsGroup: 1001
+  readOnlyRootFilesystem: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
